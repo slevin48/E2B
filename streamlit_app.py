@@ -30,10 +30,6 @@ tools = [{
 if "messages" not in st.session_state:
     st.session_state["messages"] = []
 
-def save_chat(n):
-    file_path = f'chat/convo{n}.json'
-    with open(file_path, 'w') as f:
-        json.dump(st.session_state.messages, f, indent=4)
 
 st.sidebar.title("E2B Code Interpreter")
 
@@ -75,6 +71,7 @@ if prompt := st.chat_input("Enter a prompt"):
                     "name": "execute_python",
                     "content": result,
                 })
+
         # Generate the final response
         final_response = openai.chat.completions.create(
             model="gpt-4o-mini",
